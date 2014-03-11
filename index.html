@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Let's Build a 3D Engine</title>
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="font.css">
+    <link rel="stylesheet" href="slides.css">
+</head>
+
+<body>
+    <article>
+
+        <section>
+            <div class="content">
+                <div class="byline">
+                    <div class="classy">This talk is called:</div>
+                </div>
+                <h1>Let's Build a <strong>3D Engine</strong></h1>
+                <div class="byline">
+                    <div class="classy">with this guy:</div>
+                </div>
+                <div class="me"></div>
+                <div class="byline"><a target="_blank" href="http://mkeas.org/">http://mkeas.org</a> ~ <a target="_blank" href="https://twitter.com/matthiasak">@matthiasak</a></div>
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="byline">
+                    <div class="classy">I am an author:</div>
+                </div>
+                <h1>Wrinklefree
+                    <strong>jQuery and HTML5</strong>
+                </h1>
+                <div class="byline">
+                    <div class="classy">and</div>
+                </div>
+                <h1>Wrinklefree
+                    <strong>JS for Hipsters</strong>
+                </h1>
+                <div class="byline">on Leanpub (<a target="_blank" href="https://leanpub.com/u/matthiasak">https://leanpub.com/u/matthiasak</a>)</div>
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="byline">
+                    <div class="classy large">A little outline</div>
+                </div>
+                <ol class="lt">
+                    <li>The vision is the drive, the story is the reason, the craft is the talk.</li>
+                    <li>Back to basics, falling back in love with simple pleasures.</li>
+                    <li>JavaScript basics were more helpful to me than anything, in the end.</li>
+                    <li>Math, DOM, and game concepts drive the complexity.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="byline">
+                    <div class="classy">First</div>
+                </div>
+                <h1>A confession</h1>
+                <div class="unbrokenline"></div>
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="unbrokenline"></div>
+                <h1>I'm not really a "graphics guy".</h1>
+                <div class="unbrokenline"></div>
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="byline">
+                    <div class="classy">When I was building</div>
+                </div>
+                <h1> this simple engine,</h1>
+                <div class="byline">
+                    <div class="classy"> I needed a few beers...</div>
+                </div>
+                <h1>
+                    <strong>and I knew I was in for a long fight.</strong>
+                </h1>
+            </div>
+        </section>
+
+        <section data-bespoke-state="rubiks">
+        </section>
+
+        <section data-bespoke-state="programming">
+        </section>
+
+        <section>
+            <div class="content">
+                <h2>Screenshot tour of Agora</h2>
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="byline">
+                    <span class="classy large">Listeners often quickly leap to a solution.</span>
+                </div>
+                <h3>Sometimes a person doesn't need a solution, but rather help seeing the problem.</h3>
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="byline"><span class="classy large">The old problem:</span></div>
+                <h3>How do I make a single page app with <em>blah blah</em> feature list?</h3>
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="byline"><span class="classy large">The new problem:</span></div>
+                <h3>How do I make my users not <em>hate</em> me?</h3>
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <h3>Tour of rudimentary 3D engine</h3>
+                <div class="byline"><span class="classy large">Starting over from scratch:</span></div>
+                <h4><a href="http://matthiasak.github.io/3D-svg-model-viewer/" target="_blank">3D</a></h4>
+            </div>
+        </section>
+
+        <section data-bespoke-state="billz">
+            <div class="content">
+                <div class="unbrokenline"></div>
+                <h4>When the client saw this...</h4>
+                <div class="unbrokenline"></div>
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="byline"><span class="classy large">Conceptual priorities:</span> <em>(5)</em></div>
+                <ol class="lt">
+                    <li>simplicity > complexity</li>
+                    <li>cross-platform</li>
+                    <li>speed</li>
+                    <li>fun (for them) - delights users</li>
+                    <li>fun (for me) - delights developer :)</li>
+                </ol>
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="byline"><span class="classy large">Vanilla JS -> simple pleasures in life:</span> <em>(5)</em></div>
+            </div>
+        </section>
+
+        <section data-bespoke-state="code">
+            <div class="content">
+                <h3>Vanilla JS / Functional Concepts</h3>
+                <pre>
+function bind(fn, context /**, args **/ ) {
+    var args = [].slice.call(arguments);
+    args.splice(0, 2);
+    return function() {
+        fn.apply(
+            context,
+            args.concat([].slice.call(arguments))
+        );
+    }
+}
+                </pre>
+            </div>
+        </section>
+
+        <section data-bespoke-state="code">
+            <div class="content">
+                <h3>Vanilla JS / OOP Concepts</h3>
+                <pre>
+function Polygon(id, coordinates, color, opacity, stroke, forceToBackground) {
+    this.id = id;
+    this.coordinates = coordinates;
+    this.color = color;
+    ...
+}
+
+Polygon.prototype.rotate = function() { ... }
+                </pre>
+            </div>
+        </section>
+
+        <section data-bespoke-state="code">
+            <div class="content">
+                <h3>Vanilla JS / Event handling</h3>
+                <pre>
+window.addEventListener('resize', function() {
+    rerender();
+});
+                </pre>
+            </div>
+        </section>
+
+        <section data-bespoke-state="code">
+            <div class="content">
+                <h3>Forward-looking tech with a nod to old-timey practices</h3>
+                <pre>
+var loop = bind(theLoop, renderContext, renderer);
+var recursiveAnim = function() {
+    loop();
+    requestAnimationFrame(recursiveAnim);
+};
+requestAnimationFrame(recursiveAnim);
+                </pre>
+            </div>
+        </section>
+
+        <section data-bespoke-state="code">
+            <div class="content">
+                <h3>Vanilla JS / memory consumption</h3>
+                <pre>
+function createPolygons(building) {
+    var swa = [
+        [0, 0, 0], //(x, y, z)
+        ...
+    ];
+    return [
+        new Polygon(swa, ...),
+        ...
+    ];
+}
+                </pre>
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="byline"><span class="classy large">SVG</span> <em>(4)</em></div>
+            </div>
+            <ol class="lt">
+                <li>drawing SVG != drawing Canvas != drawing WebGL</li>
+                <li>still, all just 2D APIs (e.g. THREE.js is the 3D library)</li>
+                <li>Raphael, sorta fast; needed more flexible access to DOM</li>
+                <li>DOM elements -> DOM events and DOM APIs</li>
+                <li>browsers draw SVG fast, math and memory = bottlenecks</li>
+            </ol>
+        </section>
+
+        <section data-bespoke-state="code">
+            <div class="content">
+                <h1>Raphael, simple at first</h1>
+                <pre>
+var paper = Raphael(10, 50, 320, 200);
+var circle = paper.circle(50, 40, 10);
+circle.attr("fill", "#f00");
+circle.attr("stroke", "#fff");
+                </pre>
+            </div>
+        </section>
+
+        <section data-bespoke-state="empurr">
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="byline">
+                    <div class="classy large">So I went native!</div>
+                </div>
+                <pre>
+&lt;svg version="1.1"&gt;
+    &lt;polygon
+        style="fill:rgb(43,244,113);"
+        points="241,367 241,551 84,459 84,367 136,243 241,367"&gt;
+    &lt;/polygon&gt;
+&lt;/svg&gt;
+                </pre>
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="byline">
+                    <div class="classy large">So I went native!</div>
+                </div>
+                <ul>
+                    <li>IE9+</li>
+                    <li>Just a bunch of paths &rarr; <strong>[(x1,y1), (x2,y2), (x3,y3), ...]</strong></li>
+                    <li>Can modify/persist the &lt;polygon&gt; elements with basic DOM apis</li>
+                </ul>
+                <div class="unbrokenline"></div>
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="byline"><span class="classy large">Math</span> <em>(1)</em></div>
+            </div>
+            <ol class="lt">
+                <li>projections (convert 3D coordinates to 2D pixels)</li>
+            </ol>
+        </section>
+
+        <section data-bespoke-state="project">
+        </section>
+
+        <section data-bespoke-state="project2">
+        </section>
+
+        <section data-bespoke-state="code">
+            <div class="content">
+                <h4> f(x,y,z) &rarr; (x,y)</h4>
+                <pre>
+function project(point, camera, w, h, fov) {
+    var minDim = w - h < 0 ? w : h;
+
+    var s = minDim / fov,
+        z = point[2] + camera[2],
+        x = (w/2 + scale * (point[0] + camera[0]) / z),
+        y = (h/2 + scale * (point[1] + camera[1]) / z);
+
+    return [x,y];
+}</pre>
+            </div>
+        </section>
+
+        <section data-bespoke-state="code">
+            <div class="content">
+                <h4> Now do that for every point, in every polygon. </h4>
+                <pre>
+function paint(shapes, svgShapes, camera, width, height, fov) {
+    for (var i = 0, len = shapes.length; i < len; i++) {
+        for (var j = 0; j < num_coords; j++) {
+            point = project(coords[j], camera, width, height, fov);
+            point && (svgPoints += " " + point[0] + "," + point[1]);
+        }
+        svgShapes[shape.id].setAttribute("points", svgPoints);
+    }
+}</pre>
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="byline"><span class="classy large">Steps?</span> <em></em></div>
+            </div>
+            <ol class="lt">
+                <li>data and event setup</li>
+                <li>get projections</li>
+                <li>draw()</li>
+                <li>repeat with rAF -> "das loop"</li>
+            </ol>
+        </section>
+
+        <section>
+            <div class="content">
+                <h3>Lessons learned</h3>
+                <div class="unbrokenline"></div>
+                <h4>Awesome experiences <strong>&lt;</strong> Mediocre software</h4>
+                <h4><em>I'd rather build one <strong>superb</strong> app over five normal ones.</em></h4>
+            </div>
+        </section>
+
+        <section data-bespoke-state="shutup">
+            <div class="content">
+                <div class="unbrokenline"></div>
+                <h4>When I tell someone that I did this from scratch...</h4>
+                <div class="unbrokenline"></div>
+            </div>
+        </section>
+
+        <section data-bespoke-state="power">
+            <div class="content">
+                <div class="unbrokenline"></div>
+                <h4>I know it's crazy I started from scratch, but...</h4>
+                <div class="unbrokenline"></div>
+                <ul>
+                    <li>Everything works exactly how I designed it to, and the bugs are easy to find.</li>
+                    <li>No mysteries, shallow stack traces.</li>
+                    <li><strong>It's fun to make a new release every week.</strong></li>
+                </ul>
+            </div>
+        </section>
+
+        <section data-bespoke-state="heavy-frameworks-2">
+            <div class="content">
+                <h3 class="byline classy">So</h3>
+                <h3>Takeaways?</h3>
+                <div class="unbrokenline"></div>
+                <ul>
+                    <li>Native JS APIs are easier than you think</li>
+                    <li>The Math is just a lot of steps</li>
+                    <li>Graphics frameworks share common features, and aren't that magical</li>
+                    <li>Minimalism and modularism is beautiful</li>
+                    <li>Speed should be a requirement, not just a feature</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <h3 class="byline classy large">Share some passion!</h3>
+                <ol class="lt">
+                    <li><a href="http://codepen.io/matthiasak/full/dthHJ" target="_blank">pattern generator</a></li>
+                    <li><a href="http://codepen.io/matthiasak/full/uxFiv" target="_blank">cloth v1</a></li>
+                    <li><a href="http://codepen.io/matthiasak/full/KmnBh" target="_blank">cloth v2</a></li>
+                    <li><a href="http://codepen.io/matthiasak/full/qIfcj" target="_blank">jello</a></li>
+                    <li><a href="http://matthiasak.github.io/3D-svg-model-viewer/" target="_blank">3D</a></li>
+                </ol>
+            </div>
+        </section>
+
+        <section data-bespoke-state="love">
+            <div class="content">
+                <h1>
+                    <strong>Thank You!</strong>
+                </h1>
+            </div>
+        </section>
+
+    </article>
+
+    <script src="bespoke.js"></script>
+</body>
+
+</html>
